@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>MailArchive</display-name>
+  
+  <servlet>
+        <servlet-name>restService</servlet-name>
+        <servlet-class>org.apache.wink.server.internal.servlet.RestServlet</servlet-class>
+
+        <init-param>
+            <param-name>applicationConfigLocation</param-name>
+            <param-value>/WEB-INF/resources</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>propertiesLocation</param-name>
+            <param-value>/WEB-INF/mail.properties</param-value>
+        </init-param>
+
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>restService</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+</web-app>
