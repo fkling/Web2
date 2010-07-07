@@ -30,22 +30,35 @@ public class MailResource {
         obj.put("id", mail.getId());
         return obj;
     }
+    
+    private JSONObject createMainJSONObject(Collection<Mail> mails) throws JSONException {
+    	JSONObject obj = new JSONObject();
+    	obj.put("count", mails.size());
+    	obj.put("mails", createMailsJSONObject(mails));
+    	return obj;
+    }
+    
+    private JSONObject createMailsJSONObject (Collection<Mail> mails) throws JSONException {
+    	JSONObject obj = new JSONObject();
+    	for (Mail mail: mails) {
+    		obj.put(mail.getId(), createJSONObject(mail));
+    	}
+    	return obj;
+    }
 
     @GET
     @Produces( { MediaType.APPLICATION_JSON })
-    public JSONArray getMails() {
-        JSONArray result = new JSONArray();
-
-        Collection<Mail> mails = MailManager.getInstance().getMails();
-
-        for (Mail mail : mails) {
-            try {
-                result.put(createJSONObject(mail));
-            } catch (JSONException e) {
-                e.printStackTrace();
-                throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-            }
-        }
+    public JSONObject getMails() {        
+    	JSONObject result;
+    	
+        Collection<Mail> mails = MailManager.getInstance().getMails();  
+    
+        try {
+            result = createMainJSONObject(mails);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }    
 
         return result;
     }
