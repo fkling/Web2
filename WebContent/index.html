@@ -2,10 +2,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Mail Archiver</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css"/>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.tablesorter.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-blablabalalba
+<div id="content">
+    <h1>Mail Archive</h1>
+    <div id="js-message">
+        <p>You have to enable JavaScript to use the Mail Archiver</p>
+    </div>
+    <div id="search"></div>
+    <div id="results">
+        <table id="table-view">
+            <thead>
+                <tr>
+			<th>Subject</th>
+			<th>From</th>
+			<th>Date</th>
+		</tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+    <script type="text/javascript">
+       $(function() {
+           $('#js-message').hide();
+           Application.init();
+       });     
+    </script>
 </body>
 </html>
