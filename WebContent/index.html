@@ -5,8 +5,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Mail Archiver</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css"/>
+	<link href="css/facebox.css" media="screen" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/lib/jquery.tablesorter.js"></script>
+	<script type="text/javascript" src="js/lib/facebox.js"></script>
+	<script type="text/javascript" src="js/connector.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
@@ -27,7 +30,23 @@
             </thead>
             <tbody></tbody>
         </table>
+        <div id="message-view">
+        <div id="msg-header">
+            <div id="msg-id" style="display:none"></div>
+            <div id="msg-subject"></div>
+            <div id="msg-sender"></div>
+            <div id="msg-date"></div>
+           </div>
+
+            <div id="msg-content">
+                <p></p>
+            </div>
+            <div id="msg-footer">
+                <span id="prev-date">&lt; Prev by date</span> &nbsp; <span id="next-date">Next by date &gt;</span>
+            </div>
+        </div>
     </div>
+    <div id="meta" style="display:none"></div>
 </div>
     <script type="text/javascript">
        $(function() {

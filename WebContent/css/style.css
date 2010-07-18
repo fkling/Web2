@@ -9,8 +9,39 @@ html {
     width: 100%;	
 }
 
-tr:hover {
- background-color: red;	
+
+#table-view thead th.header {
+    background-color: #E6EEEE;
+    background-image: url('../images/bg.gif');
+    background-position: right center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#table-view thead th.headerSortUp,
+#table-view thead th.headerSortDown  {
+    background-color: #8DBDD8;
+}
+
+#table-view thead th.headerSortUp {
+	background-image: url('../images/desc.gif');
+}
+
+#table-view thead th.headerSortDown  {
+    background-image: url('../images/asc.gif');
+}
+
+#table-view tbody td {
+    text-align: right;
+}
+
+#table-view tbody tr.alt td {
+    background-color: #BBB;
+}
+
+#table-view tbody tr:hover {
+    background-color: #FFF1BA !important;
+    cursor: pointer;
 }
 
 #content {
@@ -58,4 +89,7 @@ tr:hover {
     display: block;
     background-color: #00FF80;
     padding:5px;
+}
+#message-view {
+    display: none;
 }

@@ -1,21 +1,29 @@
-var result = {
-	count: 5,
-	mails: {
-		1: {id: 1, from: 'Christina', subject: 'hello', content: 'nothing here', date: '12-03-2010', parent: null},
-		2: {id: 2, from: 'Felix', subject: 're: hello', content: 'nothing here too', date: '13-03-2010', parent: 1},
-		3: {id: 3, from: 'Arber', subject: 're: hello', content: 'nothing here...really?', date: '13-03-2010', parent: 1},
-		4: {id: 4, from: 'Christina', subject: 're: hello', content: 'really!', date: '14-03-2010', parent: 3},
-		5: {id: 5, from: 'Felix', subject: 'oh boy', content: 'this damn project', date: '17-03-2010', parent: null}
+
+
+var log = function(msg) {
+	if(console) {
+		log = function(msg) {console.log(msg);};
+	}
+	else {
+		log = function(msg){/*do nothing*/};
 	}
 };
 
-
-
 var Application = {
 	init: function() {
-		$('#table-view').tablesorter();
+		$('#table-view').tablesorter()
 		this.createSearchField();
 		this.addSearchButton();
+		
+		$(document).delegate('#prev-date', 'click', function() {
+			var currentRow = Application.shadowTable.find('tr[rel='+ $('#facebox #msg-id').text() + ']');
+			log(currentRow);
+			Application.loadMsg(Application.lastResult.mails[currentRow.prev('tr').attr('rel')]);
+		});
+		$(document).delegate('#next-date', 'click', function() {
+			var currentRow = Application.shadowTable.find('tr[rel='+ $('#facebox #msg-id').text() + ']');
+			Application.loadMsg(Application.lastResult.mails[currentRow.next('tr').attr('rel')]);
+		});
 	},
 	
 	createSearchField: function(node) {
@@ -85,32 +93,47 @@ var Application = {
 			searchParams[$('select', this).val()] = $('.search-value', this).val();
 		});
 		
-		this.searchEmails(searchParams, function(mails) { Application.displayEmails(mails);});
+		gConnector.searchForEmails(searchParams, function(mails) { Application.displayEmails(mails);});
 		
-	},
-	
-	searchEmails: function(searchParams, callback) {
-		console.log(searchParams);
-		callback(result);
 	},
 	
 	displayEmails: function(result) {
 		this.lastResult = result;
 		
 		$('#table-view > tbody').empty();
+		var rowhtml = Array();
 		for(var id in result.mails) {
 			var mail = result.mails[id];
-			var rowhtml = Array();
-			rowhtml.push('<tr>');
+			rowhtml.push('<tr rel="' + id + '">');
 			for(var prop in {'subject':1, 'from':1, 'date':1}) {
 				rowhtml.push('<td>' + mail[prop] + '</td>');
 			}
-			rowhtml.push('</tr>');
+			rowhtml.push('</tr>');			
+		}
+		$(rowhtml.join('')).appendTo('#table-view > tbody');
+		
+		$('#table-view tbody tr').click(function() {
+			var msg_id = $(this).attr('rel');
+			var mail = Application.lastResult.mails[msg_id];
 			
-			$(rowhtml.join('')).appendTo('#table-view > tbody');
-			
-			$("#table-view").trigger("update"); 
-            $("#table-view").show();
+			$.facebox({div: '#message-view'});
+			Application.loadMsg(mail);			
+		});
+		$('#table-view tbody tr:even').addClass('alt');
+		
+		$("#table-view").trigger("update"); 
+        $("#table-view").show();
+        
+        this.shadowTable = $('#table-view').clone(false).appendTo('#meta').tablesorter();
+        this.shadowTable.trigger('sorton', [[[2,0]]]);
+	},
+	loadMsg: function(mail) {
+		if(mail) {
+			$('#facebox #msg-id').text(mail.id);
+			$('#facebox #msg-sender').text(mail.from);
+			$('#facebox #msg-subject').text(mail.subject);
+			$('#facebox #msg-date').text(mail.date);
+			$('#facebox #msg-content p').text(mail.content);
 		}
 	}
 };
