@@ -1,74 +1,114 @@
 package rest;
+import java.io.Serializable;
+import java.util.Date;
 
-public class Mail {
-	
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import org.apache.solr.analysis.LowerCaseFilterFactory;
+import org.apache.solr.analysis.SnowballPorterFilterFactory;
+import org.apache.solr.analysis.StandardTokenizerFactory;
+import org.hibernate.search.annotations.*;
+
+@Entity
+@Table(name="mail")
+@Indexed
+@AnalyzerDef(name = "customanalyzer",
+		tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+		filters = {
+		@TokenFilterDef(factory = LowerCaseFilterFactory.class),
+		@TokenFilterDef(factory = SnowballPorterFilterFactory.class, params = {
+		@Parameter(name = "language", value = "English")
+		})
+		})
+public class Mail implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
-	private String from;
-	private String to;
-	private String cc;
-	private String bcc;
 	private String subject;
-	private String text;
-	private String date;
+	private String author;
+	private Date date;
+	private String content;
+	private String parentId;
 	
-	public Mail(String id, String from, String to, String subject, String text) {
+	public Mail(){}
+	public Mail(String subject,String author,Date date, String content){
+		this.subject=subject;
+		this.author=author;
+		this.date=date;
+		this.content=content;
+	}
+	
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
 		this.id = id;
-		this.from = from;
-		this.to = to;
-		this.subject = subject;
-		this.text = text;
 	}
 	
-	public String getFrom() {
-		return from;
-	}
-	public void setFrom(String from) {
-		this.from = from;
-	}
-	public String getTo() {
-		return to;
-	}
-	public void setTo(String to) {
-		this.to = to;
-	}
-	public String getCc() {
-		return cc;
-	}
-	public void setCc(String cc) {
-		this.cc = cc;
-	}
-	public String getBcc() {
-		return bcc;
-	}
-	public void setBcc(String bcc) {
-		this.bcc = bcc;
-	}
+	@Column(name="subject")
+	@Field(index=Index.TOKENIZED, store=Store.NO)
 	public String getSubject() {
 		return subject;
 	}
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getText() {
-		return text;
+	
+	@Column(name="author")
+	@Field(index=Index.TOKENIZED, store=Store.NO)
+	public String getAuthor() {
+		return author;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
-
-	public String getDate() {
+	
+	@Column(name="date")
+	public Date getDate() {
 		return date;
 	}
-
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
+	
 
-	public String getId() {
-		return id;
+	@Column(name="parentId")
+	public String getParentId() {
+		return parentId;
+	}
+	
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+	
+	
+	@Column(name = "content")
+	@Field(index=Index.TOKENIZED, store=Store.NO)
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public boolean equals(Object o){		
+		if(o instanceof Mail){
+			Mail other = (Mail) o;
+			return this.getId().equals(other.getId());
+		}
+		else return false;
+	}
+	
+	public int hashCode() {
+		return this.hashCode();
 	}	
 }
