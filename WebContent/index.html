@@ -5,11 +5,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Mail Archiver</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css"/>
+	<link rel="stylesheet" href="css/ui.daterangepicker.css" type="text/css"/>
+	<link rel="stylesheet" href="css/redmond/jquery-ui-1.7.1.custom.css" type="text/css"/>
 	<link href="css/facebox.css" media="screen" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/lib/jquery-ui-1.7.1.custom.min.js"></script>
+	<script type="text/javascript" src="js/lib/daterangepicker.jQuery.js"></script>
 	<script type="text/javascript" src="js/lib/jquery.tablesorter.js"></script>
 	<script type="text/javascript" src="js/lib/facebox.js"></script>
 	<script type="text/javascript" src="js/connector.js"></script>
+	<script type="text/javascript" src="js/interface.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
@@ -18,9 +23,20 @@
     <div id="js-message">
         <p>You have to enable JavaScript to use the Mail Archiver</p>
     </div>
-    <div id="search"></div>
-    <div id="results">
-        <table id="table-view">
+    <div id="search" style="display:none">
+        <input id="query" class="search-field" size="30"/> <button id="search-button">Search</button>
+        <div id="advanced-search">
+            <span>Specify a date range to narrow down your search.</span>
+            <div>
+                <label>From:<input id="from-date" type="text" class="date" /></label>
+                <label>To:<input id="to-date" type="text" class="date" /></label>
+            </div>
+        </div>
+    </div>
+    <div id="results" style="display:none">
+        <div id="table-view">
+        <span id="result-msg"></span>
+        <table>
             <thead>
                 <tr>
 			<th>Subject</th>
@@ -30,6 +46,7 @@
             </thead>
             <tbody></tbody>
         </table>
+                </div>
         <div id="message-view">
         <div id="msg-header">
             <div id="msg-id" style="display:none"></div>
@@ -42,9 +59,16 @@
                 <p></p>
             </div>
             <div id="msg-footer">
-                <span id="prev-date">&lt; Prev by date</span> &nbsp; <span id="next-date">Next by date &gt;</span>
+                <span id="prev-date" class="link" title="Previous by date">&larr;</span>
+                <span id="date-icon"></span>
+                <span id="next-date" class="link" title="Next by date">&rarr;</span>
+                <span id="prev-thread" class="link" title="Previous in thread">&larr;</span>
+                <span id="thread-icon"></span>
+                <span id="next-thread" class="link" title="Next in thread">&rarr;</span>
+                <span id="thread-all-icon" class="link">Show in thread</span>
             </div>
         </div>
+    <button id="back-to-results" style="display:none">Back to search results</button>
     </div>
     <div id="meta" style="display:none"></div>
 </div>
