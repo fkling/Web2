@@ -24,12 +24,12 @@
         <p>You have to enable JavaScript to use the Mail Archiver</p>
     </div>
     <div id="search" style="display:none">
-        <input id="query" class="search-field" size="30"/> <button id="search-button">Search</button>
+        <input id="query" class="search-option" name="query" class="search-field" size="30"/> <button id="search-button">Search</button>
         <div id="advanced-search">
             <span>Specify a date range to narrow down your search.</span>
             <div>
-                <label>From:<input id="from-date" type="text" class="date" /></label>
-                <label>To:<input id="to-date" type="text" class="date" /></label>
+                <label>From:<input id="from-date" class="search-option date" name="fromDate" type="text" /></label>
+                <label>To:<input id="to-date" class="search-option date" name="toDate" type="text" /></label>
             </div>
         </div>
     </div>

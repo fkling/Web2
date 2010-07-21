@@ -92,12 +92,11 @@ function Connector() {
 
 Connector.prototype = {
 	searchForEmails : function(searchParams, callback) {
-		log(searchParams);
-		callback(result);
+		$.get('rest/mails/search', searchParams, callback, 'json');
 	},
 	
 	getThreadForMailId: function(mail_id, callback) {
-		callback(result_thread);
+		$.get('rest/mails/getThread', {id: mail_id}, callback, 'json');
 	}
 };
 

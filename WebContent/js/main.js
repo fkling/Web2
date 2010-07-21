@@ -20,10 +20,9 @@ var Application = {
 	serachAndDisplayEmails : function() {
 		var searchParams = {};
 
-		$('#search > .search-option').each(
+		$('#search .search-option').each(
 				function() {
-					searchParams[$('select', this).val()] = $('.search-value',
-							this).val();
+					searchParams[$(this).attr('name')] = $(this).val();
 				});
 
 		gConnector
