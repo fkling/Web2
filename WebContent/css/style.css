@@ -1,0 +1,165 @@
+@CHARSET "UTF-8";
+
+html {
+    font-family: Verdana,  non-serif;	
+}
+
+
+#table-view table{
+    width: 100%;	
+}
+
+
+#table-view thead th.header {
+    background-color: #E6EEEE;
+    background-image: url('../images/bg.gif');
+    background-position: right center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#table-view thead th.headerSortUp,
+#table-view thead th.headerSortDown  {
+    background-color: #8DBDD8;
+}
+
+#table-view thead th.headerSortUp {
+	background-image: url('../images/desc.gif');
+}
+
+#table-view thead th.headerSortDown  {
+    background-image: url('../images/asc.gif');
+}
+
+#table-view tbody td {
+    text-align: right;
+}
+
+#table-view tbody tr.alt td {
+    background-color: #BBB;
+}
+
+#table-view tbody tr:hover {
+    background-color: #FFF1BA !important;
+    cursor: pointer;
+}
+
+#content {
+    width: 800px;
+    margin:auto;
+    -moz-border-radius: 10px;
+    border: 1px solid #AAA;
+    padding:20px;
+}
+
+#js-message {
+	text-align: center;
+    margin-top: 100px;
+}
+
+.search-option {
+    background-color: #EBBC66;
+    -moz-border-radius: 10px;
+    width: 800px;
+    padding: 20px;
+    text-align: center;
+    margin: 10px auto 10px auto;
+}
+
+.button {
+    display: block;
+     -moz-border-radius: 10px;
+    padding:5px;
+    float: right;
+    border: 1px solid black;
+    width:20px;
+    height: 20xpx;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.button:hover {
+}
+
+.remove-button {
+    background-color: #FF6666;
+}
+
+.add-button {
+    display: block;
+    background-color: #00FF80;
+    padding:5px;
+}
+#message-view {
+    display: none;
+}
+
+/* search field */
+
+#query {
+    font-size:16px;
+}
+
+/* message view */
+
+
+#msg-footer {
+    font-size: 0.8em;	
+}
+#prev-date {
+
+}
+
+#date-icon {
+	background-image: url('../images/time_icon.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    height: 1em;
+    width: 16px;
+}
+
+#thread-icon {
+    background-image: url('../images/thread_icon.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    height: 1em;
+    width: 16px;
+}
+
+#thread-all-icon {
+    background-image: url('../images/thread_icon.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    display: inline-block;
+    min-height: 16px;
+    padding-left: 20px;
+}
+
+.link {
+    cursor: pointer;
+}
+
+/* thread view */
+
+.thread-view li {
+	list-style: none;
+	cursor: pointer;
+}
+
+.thread-view li span:hover {
+    background-color: #FFF1BA !important;
+}
+
+/* result view */
+
+#results {
+    margin-top:20px;
+    padding-top: 20px;
+    border-top: 1px solid black;
+}
+
+#facebox_overlay {
+    opacity: 0.6;
+}
