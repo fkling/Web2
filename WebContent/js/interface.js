@@ -28,7 +28,7 @@ var UIBuilder = {
 			       {text: 'Last 2 months', dateStart: function(){ return Date.parse('last month').moveToFirstDayOfMonth();  }, dateEnd: 'today' },
 			       {text: 'Last 3 months', dateStart: function(){ return Date.parse('today - 2 months').moveToFirstDayOfMonth();  }, dateEnd: 'today' }
 			],
-			arrows: true
+			dateFormat: 'yy-mm-dd'
 		};
 		$('input.date').daterangepicker(options); 
 		
